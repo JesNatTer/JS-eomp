@@ -8,9 +8,14 @@
 
 body{
     background-color: rgb(193, 228, 230);
+    overflow-y: hidden;
+    position: relative;
 }
 
 .landing-container{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -30,7 +35,7 @@ body{
     color: white;
 }
 
-.loginform-container{
+.loginform-container, .signupform-container{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +43,7 @@ body{
     width: 100%;
 }
 
-.loginform{
+.loginform, .signupform{
     height: 500px;
     width: 500px;
     display: flex;
@@ -48,19 +53,19 @@ body{
     background-color: white;
 }
 
-.loginform h3{
+.loginform h3, .signupform{
     font-family: 'Krona One';
     font-size: 30px;
     margin-bottom: 30px;
 }
 
-.loginform table{
+.loginform table, .signupform table{
     height: 100%;
     width: 100%;
     display: flex;
 }
 
-.loginform table tbody{
+.loginform table tbody, .signupform table tbody{
     height: 100%;
     width: 100%;
     display: flex;
@@ -68,7 +73,7 @@ body{
     justify-content: space-evenly;
 }
 
-.loginform table tr{
+.loginform table tr, .signupform table tr{
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -110,4 +115,43 @@ body{
 
 .clickreg{
     text-decoration: underline 1px black;
+    transition: 0.5s ease;
+}
+
+.clickreg:hover{
+    color: royalblue;
+}
+
+.signupcontainer{
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: 1s ease;
+    z-index: 10;
+}
+
+.signupform{
+    height: 600px;
+}
+
+.signupcontainer div{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+}
+
+.signupcontainer.active{
+    top: 0;
+}
+
+.exiticon{
+    position: fixed;
+    top: 1.5vh;
+    right: 1.5vw;
+    font-size: 30px;
+    color: white;
+    z-index: 11;
 }
