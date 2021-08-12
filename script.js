@@ -12,9 +12,13 @@ function login(){
     }
     }).then(response => response.json()).then(data => {
         console.log(data)
-        console.log(data['access_token'])
-        mystorage.setItem('jwt-token', data['access_token'])
-        window.location.href = "./products.html"
+        if (data['description'] == "Invalid credentials"){
+            alert("Username or password is incorrect. Please enter correct details")
+        }else{
+            console.log(data['access_token'])
+            mystorage.setItem('jwt-token', data['access_token'])
+            window.location.href = "./products.html"
+        }
     });
 }
 
@@ -60,14 +64,14 @@ function previewFile() {
   }
 
 function addtocatalogue(){
-    console.log({
-        "product_id": document.getElementById("aid").value,
-            "product_name": document.getElementById("aname").value,
-            "product_type": document.getElementById("atype").value,
-            "product_quantity": document.getElementById("aquantity").value,
-            "product_price": document.getElementById("aprice").value,
-            "product_image": document.getElementById("aimage").files[0],}
-    )
+    // console.log({
+    //     "product_id": document.getElementById("aid").value,
+    //         "product_name": document.getElementById("aname").value,
+    //         "product_type": document.getElementById("atype").value,
+    //         "product_quantity": document.getElementById("aquantity").value,
+    //         "product_price": document.getElementById("aprice").value,
+    //         "product_image": document.getElementById("aimage").files[0],}
+    // )
     fetch(`https://flask-eomp-jesse.herokuapp.com/addtocatalogue/`, {
         method: 'POST',
         headers: {
