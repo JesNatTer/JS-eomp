@@ -80,6 +80,19 @@
             </div>
         </div>
     </div>
+    <div class="deleteusermodal">
+        <i class="fas fa-times exiticon" onclick="deleteuserup()"></i>
+        <div class="deletemodal">
+            <h3>Delete User</h3>
+            <div class="deletecontainer">
+                <h3>Are you sure</h3>
+                <div>
+                    <div class="delyes" onclick='deleteuser()'>Yes</div>
+                    <div class="delno" onclick="deleteuserup()">No</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="heading">
             <span>Big Business</span>
@@ -93,10 +106,17 @@
             <div class="profiledetails">
                 <h1 class="profileheading">My Profile</h1>
                 <div class="profile"></div>
-                <div class="edituserbtn" onclick="edituserup()">
-                    <span>
-                        Edit User
-                    </span>
+                <div class="editdeleteuser">
+                    <div class="edituserbtn" onclick="edituserup()">
+                        <span>
+                            Edit User
+                        </span>
+                    </div>
+                    <div class="deleteuserbtn" onclick="deleteuserup()">
+                        <span>
+                            Delete user
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="myproductscontainer">

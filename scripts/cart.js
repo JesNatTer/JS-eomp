@@ -17,6 +17,8 @@ function redirectTo (e) {
 let cartitems = JSON.parse(mystorage.getItem('cart'))
 
 function rendercart(){
+    cartitems = JSON.parse(mystorage.getItem('cart'))
+    document.querySelector('.cartitemcontainer').innerHTML = ''
     cartitems.forEach(item => {
         console.log(item)
         document.querySelector('.cartitemcontainer').innerHTML += `
@@ -48,12 +50,12 @@ function rendercart(){
                         </span>
                     </div>
                     <div>
-                        <i class="fas fa-times removeicon"></i>
+                        <i class="fas fa-times removeicon" id='${item['name']}'></i>
                     </div>
                 </div>
             </div>
         `;
-        document.querySelector('.removeicon').addEventListener('click', removeFromCart(item['name']));
+        document.querySelectorAll('.removeicon').forEach(icon => icon.addEventListener('click', removeFromCart))
     });
     calctotal()
 }
@@ -75,17 +77,28 @@ function calctotal(){
                 <span>Checkout</span>
             </div>
         </div>
-    `
+    `;
+    document.querySelector('.checkout').addEventListener('click', clearcart)
 }
 
-// function removeFromCart(name){
-//     let itemname = name
-//     for (let item in cartitems){
-//         if (itemname == cartitems[item]['name']){
-//             cartitems.splice(item, 1);
-//             console.log(cartitems)
-//             mystorage['cart'] = JSON.stringify(cartitems)
-//             rendercart()
-//         }
-//     }
-// }
+function removeFromCart(e){
+    let itemname = e.target.id
+    console.log(itemname)
+    for (let item in cartitems){
+        if (itemname == cartitems[item]['name']){
+            cartitems.splice(item, 1);
+            console.log(cartitems)
+            mystorage['cart'] = JSON.stringify(cartitems)
+            rendercart()
+            calctotal()
+        }
+    }
+}
+
+function clearcart(){
+    cartitems = []
+    mystorage['cart'] = JSON.stringify(cartitems)
+    rendercart()
+    calctotal()
+    alert('Thank you for pretending to buy something.')
+}

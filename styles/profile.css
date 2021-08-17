@@ -77,7 +77,7 @@ body{
     border: 1px solid black;
 }
 
-.edituserbtn{
+.edituserbtn, .deleteuserbtn{
     margin-top: 30px;
     height: 50px;
     background-color: white;
@@ -89,12 +89,16 @@ body{
     transition: 0.5s ease;
 }
 
-.edituserbtn:hover{
+.edituserbtn{
+    margin-right: 50px;
+}
+
+.edituserbtn:hover, .deleteuserbtn:hover{
     background-color: black;
     color: white;
 }
 
-.editusermodal, .edititemmodal, .deleteitemmodal{
+.editusermodal, .edititemmodal, .deleteitemmodal, .deleteusermodal{
     position: fixed;
     top: 0;
     left: 0;
@@ -110,7 +114,7 @@ body{
     z-index: 1;
 }
 
-.editusermodal.active, .edititemmodal.active, .deleteitemmodal.active{
+.editusermodal.active, .edititemmodal.active, .deleteitemmodal.active, .deleteusermodal.active{
     opacity: 1;
     pointer-events: initial;
 }
@@ -258,4 +262,9 @@ body{
 .deletecontainer div div:hover{
     background-color: black;
     color: white;
+}
+
+.editdeleteuser{
+    display: flex;
+    align-items: center;
 }

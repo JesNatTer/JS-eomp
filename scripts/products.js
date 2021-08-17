@@ -25,6 +25,7 @@ fetch('https://js-backend.herokuapp.com/viewcatalogue')
         .forEach(button => button.addEventListener('click', addtocart))
     });
 })
+.catch(err => alert('Error. Please try again, or log in again'))
 
 function addproduct(){
     document.querySelector('.addprocontainer').classList.toggle('active')
@@ -46,23 +47,35 @@ function previewFile() {
   }
 
 function addtocatalogue(){
-    fetch(`https://flask-eomp-jesse.herokuapp.com/addtocatalogue/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json',
-            'Authorization' : `jwt ${mystorage.getItem('jwt-token')}`
-        },
-        body: JSON.stringify({
-            "product_id": document.getElementById("aid").value,
-            "product_name": document.getElementById("aname").value,
-            "product_type": document.getElementById("atype").value,
-            "product_quantity": document.getElementById("aquantity").value,
-            "product_price": document.getElementById("aprice").value,
-            "product_image": document.querySelector('.imageup').src,
-        }),
-    }).then(response => response.json).then(data => {
-        console.log(data);
-        console.log('success')})
+    let productid  = document.getElementById("aid").value
+    let productname = document.getElementById("aname").value
+    let producttype = document.getElementById("atype").value
+    let productquantity = document.getElementById("aquantity").value
+    let productprice = document.getElementById("aprice").value
+    let productimage = document.querySelector('.imageup').src
+
+    if (productid && productname && producttype && producttype && productquantity && productprice && productimage){
+        fetch(`https://flask-eomp-jesse.herokuapp.com/addtocatalogue/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : `jwt ${mystorage.getItem('jwt-token')}`
+            },
+            body: JSON.stringify({
+                "product_id": productid,
+                "product_name": productname,
+                "product_type": producttype,
+                "product_quantity": productquantity,
+                "product_price": productprice,
+                "product_image": productimage,
+            }),
+        }).then(response => response.json).then(data => {
+            console.log(data);
+            console.log('success')})
+            .catch(err => alert('Error. Please try again, or log in again'))
+    }else{
+        alert('Please fill in all forms before submitting')
+    }
 }
 
 let tohome = document.getElementById('Home').addEventListener('click', redirectTo)
@@ -117,4 +130,5 @@ function addtocart(e){
         mystorage.setItem('cart', JSON.stringify(cart))
         alert('Item added to cart successfully')
     })
+    .catch(err => alert('Error. Please try again, or log in again'))
 }

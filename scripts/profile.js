@@ -89,9 +89,11 @@ fetch(`https://js-backend.herokuapp.com/viewprofile/${username}`)
                     })
                 }
             })
+            .catch(err => alert('Error. Please try again, or log in again'))
         });
     }
 })
+.catch(err => alert('Error. Please try again, or log in again'))
 
 function edituserup(){
     document.querySelector('.editusermodal').classList.toggle('active')
@@ -136,6 +138,7 @@ function edititemup(e){
         document.querySelector('#iproductquantity').value = data['data'][0][3]
         document.querySelector('#iproductprice').value = data['data'][0][4]
     })
+    .catch(err => alert('Error. Please try again, or log in again'))
 }
 
 function deleteitemup(e){
@@ -162,7 +165,9 @@ function edituser(){
         }),
     }).then(response => response.json).then(data => {
         console.log(data);
-        console.log('success')})
+        console.log('success')
+    })
+    .catch(err => alert('Error. Please try again, or log in again'))
 }
 
 function edititem() {
@@ -189,7 +194,9 @@ function edititem() {
         }),
     }).then(response => response.json).then(data => {
         console.log(data);
-        console.log('success')})
+        console.log('success')
+    })
+    .catch(err => alert('Error. Please try again, or log in again'))
 }
 
 function deleteitem(){
@@ -200,5 +207,27 @@ function deleteitem(){
 
     }).then(response => response.json).then(data => {
         console.log(data);
-        console.log('success')})
+        console.log('success')
+    })
+    .catch(err => alert('Error. Please try again, or log in again'))
+}
+
+function deleteuserup(){
+    document.querySelector('.deleteusermodal').classList.toggle('active')
+}
+
+function deleteuser(){
+    let email = document.querySelector('.emailval').innerHTML
+    console.log(email)
+    fetch(`https://js-backend.herokuapp.com/deleteuser/${email}`, {
+        headers:{
+            'Authorization': `jwt ${mystorage.getItem('jwt-token')}`
+        }
+    })
+    .then(response => response.json)
+    .then(data => {
+        console.log(data);
+        alert('User successfully deleted')
+        window.location.href = './index.html'})
+    .catch(err => console.log(err))
 }
