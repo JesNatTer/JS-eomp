@@ -1,7 +1,7 @@
 const mystorage = window.localStorage
 
 function login(){
-    fetch('https://flask-eomp-jesse.herokuapp.com/auth', {
+    fetch('https://js-backend.herokuapp.com/auth', {
     method: "POST",
     body: JSON.stringify({
         'username': document.getElementById("lusername").value,
