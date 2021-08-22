@@ -120,6 +120,21 @@ function deleteeventadd(){
 
 let productid
 
+function previewFile() {
+    const image = document.querySelector('.previewimage');
+    const file = document.querySelector('#iproductimage').files[0];
+    const reader = new FileReader();
+  
+    reader.addEventListener("load", function () {
+      // convert image file to base64 string
+      image.src = reader.result;
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
 function edititemup(e){
     document.querySelector('.edititemmodal').classList.toggle('active');
     productid = e.target.classList[1];
