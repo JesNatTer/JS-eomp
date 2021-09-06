@@ -3,7 +3,7 @@ const mystorage = window.localStorage
 let productid
 let cart = []
 
-fetch('https://js-backend.herokuapp.com/viewcatalogue')
+fetch('https://js-backend.herokuapp.com/viewcatalogue') // <===== get 
 .then(response => response.json())
 .then(data => {
     console.log(data)
